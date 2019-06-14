@@ -1,0 +1,64 @@
+<nav class="navbar">
+
+    <h1 style="margin-left:15px">Votre sélection</h1>
+
+    <button mat-fab (click)="addNewAudioFile()" style="position: fixed; right:20px; top: 20px;">
+      <mat-icon class="iconHover">add</mat-icon>
+    </button>
+    <input #inputFile type="file" (change)="setNewAudioFile($event)" style="position: fixed; top: -100em">
+    <input #inputExistingFile type="file" (change)="setExistingFile($event)" style="position: fixed; top: -100em">
+
+</nav>
+
+
+<mat-nav-list style="margin-top:50px">
+
+    <!--<h1 mat-subheader>Morceaux joués par le groupe Peau Neuve</h1>-->
+
+    <mat-list-item *ngFor="let audio of audioFiles; index as i" (click)="itemTapped($event, audio)" style="text-align: center;">
+
+        <img matListAvatar #iconPlayPause id="iconPlayPause{{ audio.id }}" (click)="this[playSound($event, audio.id)]" src="assets/icon/play-flat.png" />
+
+        <h2 matLine>{{ audio.name }}</h2>
+
+        <mat-icon>chevron_right</mat-icon>
+
+        <mat-divider [inset]="false"></mat-divider>
+
+    </mat-list-item>
+
+</mat-nav-list>
+
+
+
+<!--
+  <ion-list>
+
+    <ion-list-header>Morceaux joués par le groupe Peau Neuve</ion-list-header>
+
+    <button ion-item *ngFor="let audio of audioFiles" (click)="itemTapped($event, audio)">
+
+      <ion-avatar item-start>
+        <img #iconPlayPause id="iconPlayPause{{ audio.id }}" src="assets/icon/play-flat.png" (click)="this[playSound($event, audio.id)]" />
+      </ion-avatar>
+
+      <h2>{{ audio.name }}</h2>
+
+      <ion-icon name="ios-arrow-forward" item-end></ion-icon>
+
+    </button>
+
+  </ion-list>
+
+-->
+
+  <!--
+  <div id="waveform"></div>
+
+  <ion-item>
+      <ion-range min="20" max="200" step="10" [(ngModel)]="minPxPerSec" (ionChange)="zoom()">
+        <ion-icon small range-left name="remove"></ion-icon>
+        <ion-icon range-right name="add"></ion-icon>
+      </ion-range>
+    </ion-item>
+  -->

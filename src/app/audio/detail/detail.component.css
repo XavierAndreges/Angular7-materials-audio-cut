@@ -1,0 +1,29 @@
+.navItems {
+    display: flex; 
+    align-items:center;
+    align-content: center;
+}
+
+.icon-play-pause {
+    width: 100px;
+    height: 100px;
+    margin-top: 0px;
+    cursor: pointer;
+    display: none;
+}
+
+.mat-fab.large {
+    width: 100px;
+    height: 100px;
+    line-height: 48px;
+   /* box-shadow: none; */
+}
+
+.mat-fab.large .mat-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    line-height: 48px;
+    box-shadow: none !
+}
+  

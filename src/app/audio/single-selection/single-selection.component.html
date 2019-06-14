@@ -1,0 +1,6 @@
+<button mat-fab (click)="addNewAudioFile()" style="position: fixed; right:20px; top: 20px;">
+  <mat-icon class="iconHover">add</mat-icon>
+</button>
+<input #inputFile type="file" (change)="setNewAudioFile($event)" style="position: fixed; top: -100em">
+
+Single

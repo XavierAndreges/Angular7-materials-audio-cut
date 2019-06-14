@@ -1,0 +1,103 @@
+<input #inputExistingFile type="file" (change)="setExistingFile($event)" style="position: fixed; top: -100em">
+
+<nav class="navbar">
+
+    <mat-grid-list cols="12" rowHeight="100px">
+
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+
+            <button mat-flat-button mat-mini-fab color="" (click)="launchBackAction()" (mouseover)="hover=true" (mouseleave)="hover=false">
+                <mat-icon [ngStyle]="{opacity: hover==true  ? 0.5 : 1 }">arrow_back</mat-icon>
+            </button>
+
+        </mat-grid-tile>
+
+        <mat-grid-tile [colspan]="10" [rowspan]="1">
+            <h1>{{ audioFile.name }}</h1>
+        </mat-grid-tile>
+
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+
+            <button #previousPage mat-mini-fab color="" (click)="goPreviousPage()">
+                <mat-icon class="iconHover">arrow_drop_up</mat-icon>
+            </button>
+
+            <button #nextPage mat-mini-fab color="" (click)="goNextPage()" style="margin-left: 20px;">
+                <mat-icon class="iconHover">arrow_drop_down</mat-icon>
+            </button>
+
+        </mat-grid-tile>
+
+    </mat-grid-list >
+
+</nav>
+
+<mat-grid-list cols="1" rowHeight="120px">
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+
+        <mat-progress-spinner #loadingSpinner mode="indeterminate" style="display: none;"></mat-progress-spinner>
+
+        <img id="play-flat" #iconPlayPause class="icon-play-pause" src="assets/icon/play-flat.png" (click)="playSound()"/>
+
+    </mat-grid-tile>
+
+</mat-grid-list >
+
+<div id="waveform" #waveform style="width: 90%; margin: 50px 5%;"></div>
+
+<mat-grid-list cols="12" rowHeight="100px">
+
+    <mat-grid-tile [colspan]="2" [rowspan]="1">
+        <button mat-mini-fab color="primary" (click)="setZoomWaveSurfer(null, 'minus')">
+            <mat-icon class="iconHover">remove</mat-icon>
+        </button>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="8" [rowspan]="1">
+        <mat-slider #slider min="2" max="200" [value]="minPxPerSec" (change)="setZoomWaveSurfer($event)" style="display: none; width:100%">
+        </mat-slider>
+    </mat-grid-tile>
+
+
+    <mat-grid-tile [colspan]="2" [rowspan]="1">
+        <button mat-mini-fab  color="primary" name="add"(click)="setZoomWaveSurfer(null, 'plus')">
+            <mat-icon class="iconHover">add</mat-icon>
+        </button>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="12" [rowspan]="1">
+
+        <button mat-fab #btnRemoveRegion   name="removeRegion" (click)="removeRegion()"style="display:none;">
+                <mat-icon class="iconHover">delete_sweep</mat-icon>
+        </button>
+
+        <button mat-fab #btnAddRegion  color="warn" name="addRegion" (click)="addRegion()" style="margin-left: 20px; display:none;">
+            <mat-icon class="iconHover">crop_free</mat-icon>
+        </button>
+
+        <button mat-fab #btnClearRegion  color="warn" name="clearRegion" (click)="clearRegion()" style="margin-left: 20px; display:none;">
+            <mat-icon class="iconHover">clear</mat-icon>
+        </button>
+
+        <button mat-fab #btnSaveRegion   name="saveRegion "(click)="saveRegion()" style="margin-left: 20px; display:none;">
+            <mat-icon class="iconHover">save</mat-icon>
+        </button>
+
+    </mat-grid-tile>
+
+    <mat-grid-tile #btnDownloadRegion [colspan]="12" [rowspan]="1" style="margin-top: 20px;">
+
+            <button mat-fab name="downloadRegion" (click)="handleEncode('mp3')" style="display:none;" class="large mat-elevation-z3">
+                <mat-icon class="iconHover">vertical_align_bottom</mat-icon>
+                mp3
+            </button>
+
+            <button mat-fab name="downloadRegionWav" (click)="handleEncode('wav')" style="display:blok;" class="large mat-elevation-z3">
+                <mat-icon class="iconHover">vertical_align_bottom</mat-icon>
+                wav
+            </button>
+
+    </mat-grid-tile>
+
+</mat-grid-list >

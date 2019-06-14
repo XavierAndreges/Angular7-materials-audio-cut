@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>
+    {{data.title}}
+</h2>
+<div mat-dialog-content>
+  {{data.message}}
+</div>
+
+
+<mat-form-field>
+    <input matInput [(ngModel)]="data.name" placeholder="Do you want to give an other name ?">
+</mat-form-field>
+
+
+<div mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="onNoClick()">No</button>
+  <button mat-raised-button color="warn" [mat-dialog-close]="data.name" cdkFocusInitial>Yes</button>
+</div>
