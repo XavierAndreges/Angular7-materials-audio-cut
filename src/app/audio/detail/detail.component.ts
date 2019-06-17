@@ -36,6 +36,7 @@ export class DetailComponent implements OnInit {
   @ViewChild('btnRemoveRegion', { read: ElementRef }) btnRemoveRegion: ElementRef;
   @ViewChild('btnSaveRegion', { read: ElementRef }) btnSaveRegion: ElementRef;
   @ViewChild('btnDownloadRegion', { read: ElementRef }) btnDownloadRegion: ElementRef;
+  @ViewChild('blockRegions', { read: ElementRef }) blockRegions: ElementRef;
 
   public audioFile: AudioFile;
   public id: number;
@@ -274,7 +275,7 @@ export class DetailComponent implements OnInit {
       this.loadingSpinner.nativeElement.style.display = "none";
       this.slider.nativeElement.style.display = "block";
       this.iconPlayPause.nativeElement.style.display = "block";
-      this.btnAddRegion.nativeElement.style.display = "block";
+      this.blockRegions.nativeElement.style.display = "block";
 
       this.placeRegion();
     });
@@ -532,7 +533,7 @@ export class DetailComponent implements OnInit {
 
     this.setWaveSurfer();
 
-    this.btnAddRegion.nativeElement.style.display = "none";
+    this.blockRegions.nativeElement.style.display = "none";
 
     this.initAudio();
 
