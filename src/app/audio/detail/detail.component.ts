@@ -76,7 +76,6 @@ export class DetailComponent implements OnInit {
     this.audioFile = this.dataManager.getAudioFiles()[this.index];
     console.log("XXX AudioDetailsPage -> ngOnInit() : this.audioFile", this.audioFile);
 
-
   }
 
 
@@ -238,12 +237,12 @@ export class DetailComponent implements OnInit {
 
 
   public setWaveSurfer(): void {
-
-    this.wavesurfer.empty();
-    this.wavesurfer.clearRegions();
-    this.wavesurfer.params.minPxPerSec = 2;
-    console.log("XXX AudioDetailsPage -> setWaveSurfer() : zoom", this.wavesurfer.params.minPxPerSec);
-
+    if (this.wavesurfer) {
+      this.wavesurfer.empty();
+      this.wavesurfer.clearRegions();
+      this.wavesurfer.params.minPxPerSec = 2;
+      console.log("XXX AudioDetailsPage -> setWaveSurfer() : zoom", this.wavesurfer.params.minPxPerSec);
+    }
   }
 
 
@@ -253,28 +252,29 @@ export class DetailComponent implements OnInit {
 
     this.wavesurfer.on('seek', function (e) {
       console.log("seek : e", e);
-      //console.log("XXXX DetailComponent => setWaveSurfer() / ON seek : getCurrentTime", myThis.wavesurfer.getCurrentTime());
+      //console.log("XXXX DetailComponent => setEventsWaveSurfer() / ON seek : getCurrentTime", myThis.wavesurfer.getCurrentTime());
       myThis.currentTime = myThis.wavesurfer.getCurrentTime();
       myThis.currentSeek = e;
       myThis.btnSaveRegion.nativeElement.disabled = null;
     });
 
     this.wavesurfer.on('region-click', function (e) {
-      console.log("XXX AudioDetailsPage => setWaveSurfer() / region-click : e", e);
+      console.log("XXX AudioDetailsPage => setEventsWaveSurfer() / region-click : e", e);
       myThis.btnSaveRegion.nativeElement.disabled = null;
     });
 
     this.wavesurfer.on('zoom', function (e) {
-      console.log("XXX AudioDetailsPage => setWaveSurfer() / zoom : e", e);
+      console.log("XXX AudioDetailsPage => setEventsWaveSurfer() / zoom : e", e);
       myThis.btnSaveRegion.nativeElement.disabled = null;
     });
 
     this.wavesurfer.on('ready', () => {
-      console.log("XXX AudioDetailsPage -> setWaveSurfer() / READY");
+      console.log("XXX AudioDetailsPage -> setEventsWaveSurfer() / READY");
 
       this.loadingSpinner.nativeElement.style.display = "none";
       this.slider.nativeElement.style.display = "block";
       this.iconPlayPause.nativeElement.style.display = "block";
+      this.btnAddRegion.nativeElement.style.display = "block";
 
       this.placeRegion();
     });
@@ -296,7 +296,6 @@ export class DetailComponent implements OnInit {
       }
 
       this.wavesurfer.zoom(this.minPxPerSec);
-
 
     } else {
 
@@ -531,9 +530,11 @@ export class DetailComponent implements OnInit {
       this.playSound("stop");
     }
 
-    this.initAudio();
+    this.setWaveSurfer();
 
-    //this.setWaveSurfer();
+    this.btnAddRegion.nativeElement.style.display = "none";
+
+    this.initAudio();
 
     var urlArray = this.locationStrategy.path().split("/");
     var urlNew = urlArray[0] + "/audio/" + this.audioFile.id;

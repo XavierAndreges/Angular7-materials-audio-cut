@@ -172,8 +172,9 @@ export class ListComponent implements OnInit {
 
   public setNewAudioFile(event): void {
     console.log("XXX ListComponent -> setNewAudioFile : event : ", event);
-    if (this.utilsService.getFileIfAudio(event)) {
-      this.saveNewFile(files[0]);
+    let file = this.utilsService.getFileIfAudio(event);
+    if (file) {
+      this.saveNewFile(file);
     }
   }
 

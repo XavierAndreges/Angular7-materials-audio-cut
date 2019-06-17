@@ -46,7 +46,7 @@
 
 <div id="waveform" #waveform style="width: 90%; margin: 50px 5%;"></div>
 
-<mat-grid-list cols="12" rowHeight="100px">
+<mat-grid-list #slider cols="12" rowHeight="100px" style="display: none;">
 
     <mat-grid-tile [colspan]="2" [rowspan]="1">
         <button mat-mini-fab color="primary" (click)="setZoomWaveSurfer(null, 'minus')">
@@ -55,7 +55,7 @@
     </mat-grid-tile>
 
     <mat-grid-tile [colspan]="8" [rowspan]="1">
-        <mat-slider #slider min="2" max="200" [value]="minPxPerSec" (change)="setZoomWaveSurfer($event)" style="display: none; width:100%">
+        <mat-slider min="2" max="200" [value]="minPxPerSec" (change)="setZoomWaveSurfer($event)" style="width:100%">
         </mat-slider>
     </mat-grid-tile>
 
@@ -66,34 +66,38 @@
         </button>
     </mat-grid-tile>
 
+</mat-grid-list >
+
+<mat-grid-list cols="12" rowHeight="100px">
+
     <mat-grid-tile [colspan]="12" [rowspan]="1">
 
-        <button mat-fab #btnRemoveRegion   name="removeRegion" (click)="removeRegion()"style="display:none;">
+        <button mat-fab #btnRemoveRegion   name="removeRegion" (click)="removeRegion()" style="display:none; margin-right: 10px; ">
                 <mat-icon class="iconHover">delete_sweep</mat-icon>
         </button>
 
-        <button mat-fab #btnAddRegion  color="warn" name="addRegion" (click)="addRegion()" style="margin-left: 20px; display:none;">
+        <button mat-fab #btnAddRegion  color="warn" name="addRegion" (click)="addRegion()" style="margin:0 10px; display:none;">
             <mat-icon class="iconHover">crop_free</mat-icon>
         </button>
 
-        <button mat-fab #btnClearRegion  color="warn" name="clearRegion" (click)="clearRegion()" style="margin-left: 20px; display:none;">
+        <button mat-fab #btnClearRegion  color="warn" name="clearRegion" (click)="clearRegion()" style="margin:0 10px; display:none;">
             <mat-icon class="iconHover">clear</mat-icon>
         </button>
 
-        <button mat-fab #btnSaveRegion   name="saveRegion "(click)="saveRegion()" style="margin-left: 20px; display:none;">
+        <button mat-fab #btnSaveRegion   name="saveRegion "(click)="saveRegion()" style="margin-left: 10px; display:none;">
             <mat-icon class="iconHover">save</mat-icon>
         </button>
 
     </mat-grid-tile>
 
-    <mat-grid-tile #btnDownloadRegion [colspan]="12" [rowspan]="1" style="margin-top: 20px;">
+    <mat-grid-tile #btnDownloadRegion [colspan]="12" [rowspan]="1" style="display:none; margin-top: 20px;">
 
-            <button mat-fab name="downloadRegion" (click)="handleEncode('mp3')" style="display:none;" class="large mat-elevation-z3">
+            <button mat-fab name="downloadRegion" (click)="handleEncode('mp3')" class="large mat-elevation-z3" style="margin-right: 10px; ">
                 <mat-icon class="iconHover">vertical_align_bottom</mat-icon>
                 mp3
             </button>
 
-            <button mat-fab name="downloadRegionWav" (click)="handleEncode('wav')" style="display:blok;" class="large mat-elevation-z3">
+            <button mat-fab name="downloadRegionWav" (click)="handleEncode('wav')" class="large mat-elevation-z3" style="margin-left: 10px;">
                 <mat-icon class="iconHover">vertical_align_bottom</mat-icon>
                 wav
             </button>

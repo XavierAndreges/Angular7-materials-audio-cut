@@ -7,18 +7,18 @@ export class UtilsService {
 
   constructor() { }
 
-  public range (min, max): Array<any> {
+  public range (min: number, max: number): Array<any> {
     return Array
     .apply(null, { length: max - min + 1 })
     .map((v, i) => i + min);
   }
 
-  public readBlobURL(file): string {
+  public readBlobURL(file: File): string {
     console.log("XXX UtilsService -> readBlobURL() : file", file);
     return URL.createObjectURL(file);
   }
 
-  public download (url, name) : void {
+  public download (url: string, name: string) : void {
     console.log("XXX ListComponent -> download() : url, name", url, name);
     const link = document.createElement('a')
     link.href = url;
@@ -26,12 +26,12 @@ export class UtilsService {
     link.click()
   }
 
-  public rename (filename, ext, stamp?): string {
+  public rename (filename: string, ext: string, stamp?: any): string {
     return `${filename.replace(/\.\w+$/, '')}${stamp || ''}.${ext}`;
   }
 
 
-  public getFileIfAudio(event): File {
+  public getFileIfAudio(event: any): File {
 
     console.log("XXX UtilsService -> getFileIfAudio() : event : ", event);
 
